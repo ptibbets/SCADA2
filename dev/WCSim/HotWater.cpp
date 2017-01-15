@@ -1,4 +1,5 @@
 #include "HotWater.h"
+#include "State.h"
 
 namespace wcsim
 {
