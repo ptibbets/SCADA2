@@ -11,6 +11,9 @@ namespace wcsim
         static constexpr float mStep {0.001};
         std::array<RHS*, 5> mElements {{nullptr}};
         State mState;
+        float mSetPoint {80};
+        float mQin {0};
+        float mTo {22};
         bool mElementsSet {false};
 
         System() = default;
@@ -22,5 +25,11 @@ namespace wcsim
         void setElements(RHS &vWaterPump, RHS &vFan, RHS &vWaterBlock, RHS &vHotWater, RHS &vColdWater);
         void calcNextState();
         State getState();
+        void setSetPoint(float vSetPoint);
+        float getSetPoint();
+        void setQin(float vQin);
+        float getQin();
+        void setTo(float vTo);
+        float getTo();
     };
 }

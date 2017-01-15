@@ -34,4 +34,34 @@ namespace wcsim
     {
         return mState;
     }
+
+    void System::setSetPoint(float vSetPoint)
+    {
+        mSetPoint = vSetPoint;
+    }
+
+    float System::getSetPoint()
+    {
+        return mSetPoint;
+    }
+
+    void System::setQin(float vQin)
+    {
+        mQin = vQin;
+    }
+
+    float System::getQin()
+    {
+        return mQin;
+    }
+
+    void System::setTo(float vTo)
+    {
+        mTo = vTo;
+    }
+
+    float System::getTo()
+    {
+        return mTo;
+    }
 }
