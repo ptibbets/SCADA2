@@ -5,6 +5,7 @@ namespace wcsim
     typedef struct _OutData
     {
         float mTime;
+        float mState[5];
     } OutData;
 
     typedef struct
@@ -16,8 +17,9 @@ namespace wcsim
 
     typedef struct _InData
     {
-        float mSetPoint;
         PID mPID1;
         PID mPID2;
+        float mSetPoint;
+        float mPower;
     } InData;
 }
