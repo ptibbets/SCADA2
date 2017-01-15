@@ -9,8 +9,8 @@ namespace wcsim
         static constexpr float mSpecificHeat {710};
         static constexpr float mMass {0.01};
         static constexpr float mThermalResistance {0.3};
-        static constexpr float mFirstDenominator {mSpecificHeat * mMass};
-        static constexpr float mSecondDenominator {mSpecificHeat * mMass * mThermalResistance};
+        static constexpr float mFirstCoeff {1 / (mSpecificHeat * mMass)};
+        static constexpr float mSecondCoeff {1 / (mSpecificHeat * mMass * mThermalResistance)};
 
     public:
         WaterBlock() = default;

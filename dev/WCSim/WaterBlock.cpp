@@ -6,6 +6,6 @@ namespace wcsim
 {
     float WaterBlock::operator()(float vTime, State &vState) const
     {
-        return System::getInstance().getQin() / mFirstDenominator - (vState[2] - vState[3]) / mSecondDenominator;
+        return mFirstCoeff * System::getInstance().getQin() - mSecondCoeff * (vState[2] - vState[3]);
     }
 }
