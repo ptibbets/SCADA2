@@ -51,10 +51,12 @@
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths.412080502" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;../Drivers&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Drivers/CMSIS/Device/ST/STM32L4xx/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Drivers/CMSIS/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Drivers/STM32L4xx_HAL_Driver/Inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../WCSim&quot;"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input.429504573" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input"/>
 							</tool>
@@ -64,10 +66,12 @@
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths.1698419503" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;../Drivers&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Drivers/CMSIS/Device/ST/STM32L4xx/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Drivers/CMSIS/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Drivers/STM32L4xx_HAL_Driver/Inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../WCSim&quot;"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.949837168" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
 							</tool>
@@ -77,10 +81,12 @@
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths.543505129" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;../Drivers&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Drivers/CMSIS/Device/ST/STM32L4xx/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Drivers/CMSIS/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Drivers/STM32L4xx_HAL_Driver/Inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../HAL/Inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../WCSim&quot;"/>
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.noexceptions.950201140" name="Do not use exceptions (-fno-exceptions)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.noexceptions" useByScannerDiscovery="true" value="true" valueType="boolean"/>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.nortti.1256653162" name="Do not use RTTI (-fno-rtti)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.nortti" useByScannerDiscovery="true" value="true" valueType="boolean"/>
@@ -120,6 +126,9 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
@@ -198,6 +207,9 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
