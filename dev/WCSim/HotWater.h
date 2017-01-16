@@ -6,7 +6,7 @@ namespace wcsim
 {
     class HotWater: public RHS
     {
-        static constexpr float mMass {0.15}
+        static constexpr float mMass {0.15};
         static constexpr float mSpecificHeat {4190};
         static constexpr float mThermalResistance {0.3};
         static constexpr float mFlow {1.5 / 3600};
