@@ -21,5 +21,6 @@ namespace wcsim
         PID mPID2;
         float mSetPoint;
         float mPower;
+        float mTo;
     } InData;
 }

@@ -12,11 +12,11 @@ namespace wcsim
         std::array<RHS*, 5> mElements {{nullptr}};
         State mState;
         float mSetPoint {80};
-        float mQin {0};
+        float mQin {140};
         float mTo {22};
         bool mElementsSet {false};
 
-        System() = default;
+        System();
         System(System const &) = delete;
         System & operator=(System const &) = delete;
 

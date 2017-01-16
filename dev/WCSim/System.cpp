@@ -2,9 +2,20 @@
 #include "State.h"
 #include "Solver.h"
 #include "TimeManager.h"
+#include "PumpController.h"
+#include "FanController.h"
 
 namespace wcsim
 {
+    System::System()
+    {
+        mState[0] = 0;
+        mState[1] = 0;
+        mState[2] = mTo;
+        mState[3] = mTo;
+        mState[4] = mTo;
+    }
+
     System & System::getInstance()
     {
         static System aInstance;
@@ -26,6 +37,8 @@ namespace wcsim
         if(mElementsSet)
         {
             auto aTime = TimeManager::getInstance().getTime();
+            PumpController::getInstance().setE(mState[2] - mSetPoint);
+            FanController::getInstance().setE(mState[2] - mSetPoint);
             mState = Solver::solve(mElements, mState, aTime, aTime + 0.005, mStep);
         }
     }
