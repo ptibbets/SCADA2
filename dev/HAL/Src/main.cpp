@@ -36,7 +36,15 @@
 #include "gpio.h"
 
 /* USER CODE BEGIN Includes */
-
+#include <CommunicationDriver.h>
+#include <MainLoop.h>
+#include <WaterPump.h>
+#include <Fan.h>
+#include <WaterBlock.h>
+#include <HotWater.h>
+#include <ColdWater.h>
+#include <System.h>
+#include <TimeManagerDriver.h>
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -79,14 +87,23 @@ int main(void)
   MX_USART2_UART_Init();
 
   /* USER CODE BEGIN 2 */
-
+//  uint8_t aTest[] = "test";
+//  HAL_UART_Transmit(&huart2, aTest, sizeof(aTest), 100);
+  wcsim::CommunicationDriver::getInstance().setUARTHandle(&huart2);
+  wcsim::WaterPump aPump;
+  wcsim::Fan aFan;
+  wcsim::WaterBlock aWaterBlock;
+  wcsim::HotWater aHotWater;
+  wcsim::ColdWater aColdWater;
+  wcsim::System::getInstance().setElements(aPump, aFan, aWaterBlock, aHotWater, aColdWater);
+  wcsim::TimeManagerDriver::getInstance();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-      MainLoo
+      wcsim::MainLoop::getInstance().nextIter();
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
