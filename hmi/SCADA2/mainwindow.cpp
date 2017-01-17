@@ -12,3 +12,18 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_pbSetPIDs_released()
+{
+
+}
+
+void MainWindow::on_pbConnect_released()
+{
+
+}
+
+void MainWindow::on_pbDisconnect_released()
+{
+
+}
