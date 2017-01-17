@@ -11,8 +11,8 @@ namespace wcsim
         Communication & operator=(Communication const &) = delete;
 
     protected:
-        bool mDataSent {true};
         bool mNewData {false};
+        bool mDataReceived {true};
         static Communication * mInstance;
 
         Communication(Communication * vInstance);

@@ -4,6 +4,7 @@
 namespace wcsim
 {
     static InData aInData {};
+    static OutData aOutData {};
 
     CommunicationDriver::CommunicationDriver() :
             Communication(this)
@@ -12,9 +13,11 @@ namespace wcsim
 
     void CommunicationDriver::sendData(OutData vOutData)
     {
-        if(mDataSent)
+        if(mDataReceived)
         {
-            auto aData = reinterpret_cast<uint8_t*>(&vOutData);
+            mDataReceived = false;
+            aOutData = vOutData;
+            auto aData = reinterpret_cast<uint8_t*>(&aOutData);
             HAL_UART_Transmit_IT(mUARTHandle, aData, sizeof(OutData));
         }
     }
@@ -22,8 +25,6 @@ namespace wcsim
     InData CommunicationDriver::getInData()
     {
         mNewData = false;
-        auto aData = reinterpret_cast<uint8_t*>(&aInData);
-        HAL_UART_Receive_IT(mUARTHandle, aData, sizeof(InData));
         return aInData;
     }
 
@@ -40,12 +41,14 @@ namespace wcsim
 
     void CommunicationDriver::dataSent()
     {
-        mDataSent = true;
+        auto aData = reinterpret_cast<uint8_t*>(&aInData);
+        HAL_UART_Receive_IT(mUARTHandle, aData, sizeof(InData));
     }
 
     void CommunicationDriver::dataReceived()
     {
         mNewData = true;
+        mDataReceived = true;
     }
 }
 

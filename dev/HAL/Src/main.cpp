@@ -45,6 +45,7 @@
 #include <ColdWater.h>
 #include <System.h>
 #include <TimeManagerDriver.h>
+#include <CommunicationData.h>
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -87,8 +88,20 @@ int main(void)
   MX_USART2_UART_Init();
 
   /* USER CODE BEGIN 2 */
-//  uint8_t aTest[] = "test";
+//  wcsim::OutData aData;
+//  aData.mTime = 0.5;
+//  aData.mState[0] = 1.5;
+//  aData.mState[1] = 1.5;
+//  aData.mState[2] = 1.5;
+//  aData.mState[3] = 1.5;
+//  aData.mState[4] = 1.5;
+//  uint8_t aTest[sizeof(wcsim::OutData)];
+//  for(auto aIndex = 0; aIndex < sizeof(wcsim::OutData); aIndex++)
+//  {
+//      aTest[aIndex] = reinterpret_cast<uint8_t*>(&aData)[aIndex];
+//  }
 //  HAL_UART_Transmit(&huart2, aTest, sizeof(aTest), 100);
+//  while(true);
   wcsim::CommunicationDriver::getInstance().setUARTHandle(&huart2);
   wcsim::WaterPump aPump;
   wcsim::Fan aFan;
