@@ -37,6 +37,8 @@ namespace wcsim
     void CommunicationDriver::setUARTHandle(UART_HandleTypeDef *vHandle)
     {
         mUARTHandle = vHandle;
+        auto aData = reinterpret_cast<uint8_t*>(&aInData);
+        HAL_UART_Receive_IT(mUARTHandle, aData, sizeof(InData));
     }
 
     void CommunicationDriver::dataSent()
@@ -56,7 +58,7 @@ extern "C"
 {
     void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     {
-        if(huart->RxXferCount == sizeof(wcsim::InData))
+        if(huart->RxXferCount == 0)
         {
             wcsim::CommunicationDriver::getInstance().dataReceived();
         }
@@ -64,7 +66,7 @@ extern "C"
 
     void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
     {
-        if(huart->TxXferCount == sizeof(wcsim::OutData))
+        if(huart->TxXferCount == 0)
         {
             wcsim::CommunicationDriver::getInstance().dataSent();
         }

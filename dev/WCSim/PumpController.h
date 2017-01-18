@@ -12,5 +12,6 @@ namespace wcsim
 
     public:
         static PumpController & getInstance();
+        float getCV() const override;
     };
 }

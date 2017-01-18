@@ -12,7 +12,7 @@ namespace wcsim
 
     protected:
         bool mNewData {false};
-        bool mDataReceived {true};
+        bool mDataReceived {false};
         static Communication * mInstance;
 
         Communication(Communication * vInstance);

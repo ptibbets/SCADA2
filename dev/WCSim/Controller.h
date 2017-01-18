@@ -4,6 +4,7 @@ namespace wcsim
 {
     class Controller
     {
+    protected:
         float mP {1};
         float mI {0};
         float mD {0};
@@ -11,7 +12,6 @@ namespace wcsim
         float mIntegrator {0};
         float mLastE {0};
 
-    protected:
         Controller() = default;
 
     public:
@@ -19,7 +19,7 @@ namespace wcsim
         void setI(float vI);
         void setD(float vD);
         void setE(float vE);
-        float getCV() const;
+        virtual float getCV() const;
     };
 
 }

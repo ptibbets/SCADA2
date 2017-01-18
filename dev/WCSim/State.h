@@ -11,76 +11,84 @@ namespace wcsim
     public:
         State() = default;
 
-        State & operator+(float vCoef)
+        State operator+(float vCoef)
         {
+            State aNewState;
             for(std::size_t aIndex = 0; aIndex < mState.size(); aIndex++)
             {
-                mState[aIndex] += vCoef;
+                aNewState[aIndex] = mState[aIndex] + vCoef;
             }
-            return *this;
+            return aNewState;
         }
 
-        State & operator+(State & vOther)
+        State operator+(State & vOther)
         {
+            State aNewState;
             for(std::size_t aIndex = 0; aIndex < mState.size(); aIndex++)
             {
-                mState[aIndex] += vOther[aIndex];
+                aNewState[aIndex] = mState[aIndex] + vOther[aIndex];
             }
-            return *this;
+            return aNewState;
         }
 
-        State & operator-(float vCoef)
+        State operator-(float vCoef)
         {
+            State aNewState;
             for(std::size_t aIndex = 0; aIndex < mState.size(); aIndex++)
             {
-                mState[aIndex] -= vCoef;
+                aNewState[aIndex] = mState[aIndex] - vCoef;
             }
-            return *this;
+            return aNewState;
         }
 
-        State & operator-(State & vOther)
+        State operator-(State & vOther)
         {
+            State aNewState;
             for(std::size_t aIndex = 0; aIndex < mState.size(); aIndex++)
             {
-                mState[aIndex] -= vOther[aIndex];
+                aNewState[aIndex] = mState[aIndex] - vOther[aIndex];
             }
-            return *this;
+            return aNewState;
         }
 
-        State & operator*(float vCoef)
+        State operator*(float vCoef)
         {
+            State aNewState;
             for(std::size_t aIndex = 0; aIndex < mState.size(); aIndex++)
             {
-                mState[aIndex] *= vCoef;
+                aNewState[aIndex] = mState[aIndex] * vCoef;
             }
-            return *this;
+            return aNewState;
         }
 
-        State & operator*(State & vOther)
+        State operator*(State & vOther)
         {
+            State aNewState;
             for(std::size_t aIndex = 0; aIndex < mState.size(); aIndex++)
             {
-                mState[aIndex] *= vOther[aIndex];
+                aNewState[aIndex] = mState[aIndex] * vOther[aIndex];
             }
-            return *this;
+            return aNewState;
         }
 
-        State & operator/(float vCoef)
+        State operator/(float vCoef)
         {
+            State aNewState;
             for(std::size_t aIndex = 0; aIndex < mState.size(); aIndex++)
             {
-                mState[aIndex] /= vCoef;
+                aNewState[aIndex] = mState[aIndex] / vCoef;
             }
-            return *this;
+            return aNewState;
         }
 
-        State & operator/(State & vOther)
+        State operator/(State & vOther)
         {
+            State aNewState;
             for(std::size_t aIndex = 0; aIndex < mState.size(); aIndex++)
             {
-                mState[aIndex] /= vOther[aIndex];
+                aNewState[aIndex] = mState[aIndex] / vOther[aIndex];
             }
-            return *this;
+            return aNewState;
         }
 
         float & operator[](std::size_t vIndex)
