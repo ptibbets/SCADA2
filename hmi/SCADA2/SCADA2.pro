@@ -27,9 +27,14 @@ DEFINES += QT_NO_PRINTER
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    communication.cpp \
+    mainloop.cpp
 
 HEADERS  += mainwindow.h \
-    qcustomplot.h
+    qcustomplot.h \
+    communication.h \
+    CommunicationData.h \
+    mainloop.h
 
 FORMS    += mainwindow.ui
