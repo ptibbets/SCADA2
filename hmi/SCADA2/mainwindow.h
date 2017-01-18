@@ -3,12 +3,31 @@
 
 #include <QMainWindow>
 #include "qcustomplot.h"
+#include <vector>
 
 namespace Ui {
 class MainWindow;
 }
 
 class MainLoop;
+
+class Alarm : public QListWidgetItem
+{
+    int mState;
+
+    int mLevel;
+
+    double mValue;
+
+public:
+    Alarm(QString &vText, int vState, int vLevel, double vValue);
+
+    int getState();
+
+    int getLevel();
+
+    double getValue();
+};
 
 class MainWindow : public QMainWindow
 {
@@ -23,6 +42,8 @@ public:
     void registerLoop(MainLoop *vLoop);
 
     void resetPlot();
+
+    std::vector<Alarm> & getAlarms();
 
 private slots:
     void on_pbSetPIDs_released();
@@ -41,12 +62,24 @@ private slots:
 
     void on_hsPower_valueChanged(int value);
 
+    void on_pbAddAlarm_released();
+
+    void on_pbDeleteAlarm_released();
+
 private:
     Ui::MainWindow *ui;
 
     MainLoop *mLoop;
 
+    std::vector<Alarm> mAlarms;
+
     void setInData();
+
+    int getSelectedStateForAlarm();
+
+    int getSelectedLevelForAlarm();
+
+    void addAlarm(int vState, int vLevel, double vValue);
 };
 
 #endif // MAINWINDOW_H

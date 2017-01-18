@@ -4,6 +4,26 @@
 #include "CommunicationData.h"
 #include "mainloop.h"
 
+Alarm::Alarm(QString &vText, int vState, int vLevel, double vValue) :
+    QListWidgetItem(vText), mState(vState), mLevel(vLevel), mValue(vValue)
+{
+}
+
+int Alarm::getState()
+{
+    return mState;
+}
+
+int Alarm::getLevel()
+{
+    return mLevel;
+}
+
+double Alarm::getValue()
+{
+    return mValue;
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -50,6 +70,11 @@ void MainWindow::resetPlot()
     ui->verticalLayout_3->addWidget(ui->plot);
 }
 
+std::vector<Alarm> & MainWindow::getAlarms()
+{
+    return mAlarms;
+}
+
 void MainWindow::setInData()
 {
     InData aInData;
@@ -72,6 +97,89 @@ void MainWindow::setInData()
     ui->labSetPoint->setText(QString::number(ui->hsSetPoint->value(), 'f', 3));
     ui->labTo->setText(QString::number(ui->hsTo->value(), 'f', 3));
     ui->labPower->setText(QString::number(ui->hsPower->value(), 'f', 3));
+}
+
+int MainWindow::getSelectedStateForAlarm()
+{
+    if(ui->rbPump->isChecked())
+    {
+        return 0;
+    }
+    else if(ui->rbFan->isChecked())
+    {
+        return 1;
+    }
+    else if(ui->rbCPU->isChecked())
+    {
+        return 2;
+    }
+    else if(ui->rbHot->isChecked())
+    {
+        return 3;
+    }
+    else
+    {
+        return 4;
+    }
+}
+
+int MainWindow::getSelectedLevelForAlarm()
+{
+    if(ui->rbHigher->isChecked())
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
+
+void MainWindow::addAlarm(int vState, int vLevel, double vValue)
+{
+//    auto aAlarm = Alarm(vState, vLevel, vValue);
+//    mAlarms.push_back(aAlarm);
+    QString aAlarmText;
+    switch(vState)
+    {
+    case 0:
+    {
+        aAlarmText += "Pump speed ";
+        break;
+    }
+    case 1:
+    {
+        aAlarmText += "Fan speed ";
+        break;
+    }
+    case 2:
+    {
+        aAlarmText += "CPU temp ";
+        break;
+    }
+    case 3:
+    {
+        aAlarmText += "Hot Water temp ";
+        break;
+    }
+    case 4:
+    {
+        aAlarmText += "Cold Water temp";
+        break;
+    }
+    }
+    if(vLevel == 0)
+    {
+        aAlarmText += "higher than ";
+    }
+    else
+    {
+        aAlarmText += "lower than ";
+    }
+    aAlarmText += QString::number(vValue, 'f', 3);
+    auto aAlarm = Alarm(aAlarmText, vState, vLevel, vValue);
+    mAlarms.push_back(aAlarm);
+    ui->allAlarms->insertItem(mAlarms.size() - 1, &mAlarms.at(mAlarms.size() - 1));
 }
 
 void MainWindow::on_pbSetPIDs_released()
@@ -154,4 +262,31 @@ void MainWindow::on_hsPower_valueChanged(int value)
 {
     (void)value;
     setInData();
+}
+
+void MainWindow::on_pbAddAlarm_released()
+{
+    auto aState = getSelectedStateForAlarm();
+    auto aLevel = getSelectedLevelForAlarm();
+    addAlarm(aState, aLevel, ui->alarmValue->value());
+}
+
+void MainWindow::on_pbDeleteAlarm_released()
+{
+    auto aVal = ui->allAlarms->selectedItems();
+    auto aItem = dynamic_cast<Alarm*>(aVal[0]);
+    if(aItem != nullptr)
+    {
+        for(std::size_t aIndex = 0; aIndex < mAlarms.size(); aIndex++)
+        {
+            if((aItem->getState() == mAlarms[aIndex].getState()) &&
+                    (aItem->getLevel() == mAlarms[aIndex].getLevel()) &&
+                    (aItem->getValue() == mAlarms[aIndex].getValue()))
+            {
+                mAlarms.erase(mAlarms.begin() + aIndex);
+                ui->allAlarms->removeItemWidget(aItem);
+                break;
+            }
+        }
+    }
 }
