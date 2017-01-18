@@ -129,6 +129,24 @@ void MainWindow::deleteActiveAlarm(Alarm &vAlarm)
     }
 }
 
+void MainWindow::displayDataOnTechnology(double vPump, double vFan, double vWB, double vHot, double vCold)
+{
+    ui->ltPump->setText(QString::number(vPump, 'f', 2));
+    ui->ltFan->setText(QString::number(vFan, 'f', 2));
+    ui->ltWB->setText(QString::number(vWB, 'f', 2));
+    ui->ltHot->setText(QString::number(vHot, 'f', 2));
+    ui->ltCold->setText(QString::number(vCold, 'f', 2));
+}
+
+void MainWindow::clearDataOnTechnology()
+{
+    ui->ltPump->setText("");
+    ui->ltFan->setText("");
+    ui->ltWB->setText("");
+    ui->ltHot->setText("");
+    ui->ltCold->setText("");
+}
+
 void MainWindow::setInData()
 {
     InData aInData;

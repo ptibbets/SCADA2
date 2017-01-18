@@ -48,6 +48,10 @@ public:
 
     void deleteActiveAlarm(Alarm &vAlarm);
 
+    void displayDataOnTechnology(double vPump, double vFan, double vWB, double vHot, double vCold);
+
+    void clearDataOnTechnology();
+
 private slots:
     void on_pbSetPIDs_released();
 

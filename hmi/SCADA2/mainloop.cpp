@@ -133,5 +133,10 @@ void MainLoop::nextIter()
             plot(aData);
         }
         checkAlarms(aData);
+        mWindow.displayDataOnTechnology(aData.mState[0], aData.mState[1], aData.mState[2], aData.mState[3], aData.mState[4]);
+    }
+    else
+    {
+        mWindow.clearDataOnTechnology();
     }
 }
