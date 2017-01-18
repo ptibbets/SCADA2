@@ -1,0 +1,65 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{amsfonts}
+
+\newgeometry{tmargin=2cm, bmargin=2cm, lmargin=2cm, rmargin=2cm}
+
+\setlength{\parindent}{10mm}
+\setlength{\parskip}{4mm}
+
+% \includeonly{wnioski}
+
+\begin{document}
+    
+    \pagestyle{fancy}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead{}
+    \lfoot{\textit{WSSiS SCADA --~semestr zimowy 2016/2017}}
+    \cfoot{}
+    \rfoot{\textit{Strona \thepage}}
+    
+    \begin{titlepage}
+        \title{
+        \centering
+        \includegraphics[width=3cm]{../img/agh_logo.jpg}\\[1cm]
+        \textit{\Large{Akademia Górniczo-Hutnicza im. Stanisława Staszica\\ w
+        Krakowie}}\\[0.7cm]
+        \large{\textsc{Wielopoziomowe struktury sterowania i~systemy
+        SCADA}}\\[1cm]
+        \rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+        \rule{\textwidth}{0.4pt}\\[\baselineskip]
+        \Huge{\textsc{Model układu chłodzenia cieczą wraz z~panelem
+        operatorskim wykonanym z~wykorzystaniem biblioteki graficznej Qt}}
+        \rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+        \rule{\textwidth}{1.6pt}\\[\baselineskip]}
+        \author{\textit{Autorzy:}\\
+        \Large{Adasiewicz Konrad} \\
+        \Large{Maciejewski Michał}}
+        \date{\textit{Data wykonania:}\\ \today}
+        \maketitle
+        \thispagestyle{empty}
+    \end{titlepage}
+
+    \tableofcontents
+
+%     \include{wstep}
+%     \include{model}
+%     \include{algorytm}
+%     \include{problem}
+%     \include{eksperymenty}
+%     \include{wnioski}
+%     \include{listings}
+%     \include{bib}
+    
+\end{document}
