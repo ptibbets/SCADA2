@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include "qcustomplot.h"
-#include <vector>
 
 namespace Ui {
 class MainWindow;
@@ -43,7 +42,11 @@ public:
 
     void resetPlot();
 
-    std::vector<Alarm> & getAlarms();
+    QList<Alarm> & getAlarms();
+
+    void addActiveAlarm(Alarm &vAlarm);
+
+    void deleteActiveAlarm(Alarm &vAlarm);
 
 private slots:
     void on_pbSetPIDs_released();
@@ -71,7 +74,9 @@ private:
 
     MainLoop *mLoop;
 
-    std::vector<Alarm> mAlarms;
+    QList<Alarm> mAlarms;
+
+    QList<Alarm> mActiveAlarms;
 
     void setInData();
 
@@ -80,6 +85,8 @@ private:
     int getSelectedLevelForAlarm();
 
     void addAlarm(int vState, int vLevel, double vValue);
+
+    QString getAlarmText(int vState, int vLevel, double vValue);
 };
 
 #endif // MAINWINDOW_H

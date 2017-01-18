@@ -3,6 +3,36 @@
 
 static InData aInData;
 
+void MainLoop::checkAlarms(OutData &vOutData)
+{
+    auto& aAlarms = mWindow.getAlarms();
+    for(auto& aElem : aAlarms)
+    {
+        if(aElem.getLevel() == 0)
+        {
+            if(vOutData.mState[aElem.getState()] > aElem.getValue())
+            {
+                mWindow.addActiveAlarm(aElem);
+            }
+            else
+            {
+                mWindow.deleteActiveAlarm(aElem);
+            }
+        }
+        else
+        {
+            if(vOutData.mState[aElem.getState()] < aElem.getValue())
+            {
+                mWindow.addActiveAlarm(aElem);
+            }
+            else
+            {
+                mWindow.deleteActiveAlarm(aElem);
+            }
+        }
+    }
+}
+
 MainLoop::MainLoop(QObject *vParent, MainWindow &vWindow) :
     QObject(vParent),
     mWindow(vWindow)
@@ -102,5 +132,6 @@ void MainLoop::nextIter()
         {
             plot(aData);
         }
+        checkAlarms(aData);
     }
 }

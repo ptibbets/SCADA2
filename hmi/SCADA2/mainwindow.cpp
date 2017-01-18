@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->cbCPU->setDisabled(true);
     ui->cbHot->setDisabled(true);
     ui->cbCold->setDisabled(true);
+    ui->rbPump->setChecked(true);
+    ui->rbLower->setChecked(true);
     setInData();
 }
 
@@ -70,9 +72,59 @@ void MainWindow::resetPlot()
     ui->verticalLayout_3->addWidget(ui->plot);
 }
 
-std::vector<Alarm> & MainWindow::getAlarms()
+QList<Alarm> & MainWindow::getAlarms()
 {
     return mAlarms;
+}
+
+void MainWindow::addActiveAlarm(Alarm &vAlarm)
+{
+    bool aExist = false;
+    for(auto& aElem : mActiveAlarms)
+    {
+        if((vAlarm.getState() == aElem.getState()) &&
+                (vAlarm.getLevel() == aElem.getLevel()) &&
+                (vAlarm.getValue() == aElem.getValue()))
+        {
+            aExist = true;
+            break;
+        }
+    }
+    if(!aExist)
+    {
+        auto aAlarm = vAlarm;
+        aAlarm.setForeground(Qt::red);
+        mActiveAlarms.push_back(aAlarm);
+        ui->activeAlarms->addItem(const_cast<Alarm*>(&mActiveAlarms.at(mActiveAlarms.size() - 1)));
+    }
+}
+
+void MainWindow::deleteActiveAlarm(Alarm &vAlarm)
+{
+    for(auto aIndex = 0; aIndex < ui->activeAlarms->count(); aIndex++)
+    {
+        auto aItem = dynamic_cast<Alarm*>(ui->activeAlarms->item(aIndex));
+        if(aItem != nullptr)
+        {
+            if((vAlarm.getState() == aItem->getState()) &&
+                    (vAlarm.getLevel() == aItem->getLevel()) &&
+                    (vAlarm.getValue() == aItem->getValue()))
+            {
+                ui->activeAlarms->removeItemWidget(aItem);
+                for(auto aElem = 0; aElem < mActiveAlarms.size(); aElem++)
+                {
+                    if((aItem->getState() == mActiveAlarms[aIndex].getState()) &&
+                            (aItem->getLevel() == mActiveAlarms[aIndex].getLevel()) &&
+                            (aItem->getValue() == mActiveAlarms[aIndex].getValue()))
+                    {
+                        mActiveAlarms.erase(mActiveAlarms.begin() + aIndex);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
 }
 
 void MainWindow::setInData()
@@ -137,8 +189,28 @@ int MainWindow::getSelectedLevelForAlarm()
 
 void MainWindow::addAlarm(int vState, int vLevel, double vValue)
 {
-//    auto aAlarm = Alarm(vState, vLevel, vValue);
-//    mAlarms.push_back(aAlarm);
+    bool aExist = false;
+    for(auto& aElem : mAlarms)
+    {
+        if((vState == aElem.getState()) &&
+                (vLevel == aElem.getLevel()) &&
+                (vValue == aElem.getValue()))
+        {
+            aExist = true;
+            break;
+        }
+    }
+    if(!aExist)
+    {
+        auto aAlarmText = getAlarmText(vState, vLevel, vValue);
+        auto aAlarm = Alarm(aAlarmText, vState, vLevel, vValue);
+        mAlarms.push_back(aAlarm);
+        ui->allAlarms->addItem(const_cast<Alarm*>(&mAlarms.at(mAlarms.size() - 1)));
+    }
+}
+
+QString MainWindow::getAlarmText(int vState, int vLevel, double vValue)
+{
     QString aAlarmText;
     switch(vState)
     {
@@ -177,9 +249,7 @@ void MainWindow::addAlarm(int vState, int vLevel, double vValue)
         aAlarmText += "lower than ";
     }
     aAlarmText += QString::number(vValue, 'f', 3);
-    auto aAlarm = Alarm(aAlarmText, vState, vLevel, vValue);
-    mAlarms.push_back(aAlarm);
-    ui->allAlarms->insertItem(mAlarms.size() - 1, &mAlarms.at(mAlarms.size() - 1));
+    return aAlarmText;
 }
 
 void MainWindow::on_pbSetPIDs_released()
@@ -274,18 +344,21 @@ void MainWindow::on_pbAddAlarm_released()
 void MainWindow::on_pbDeleteAlarm_released()
 {
     auto aVal = ui->allAlarms->selectedItems();
-    auto aItem = dynamic_cast<Alarm*>(aVal[0]);
-    if(aItem != nullptr)
+    if(aVal.size() > 0)
     {
-        for(std::size_t aIndex = 0; aIndex < mAlarms.size(); aIndex++)
+        auto aItem = dynamic_cast<Alarm*>(aVal[0]);
+        if(aItem != nullptr)
         {
-            if((aItem->getState() == mAlarms[aIndex].getState()) &&
-                    (aItem->getLevel() == mAlarms[aIndex].getLevel()) &&
-                    (aItem->getValue() == mAlarms[aIndex].getValue()))
+            for(auto aIndex = 0; aIndex < mAlarms.size(); aIndex++)
             {
-                mAlarms.erase(mAlarms.begin() + aIndex);
-                ui->allAlarms->removeItemWidget(aItem);
-                break;
+                if((aItem->getState() == mAlarms[aIndex].getState()) &&
+                        (aItem->getLevel() == mAlarms[aIndex].getLevel()) &&
+                        (aItem->getValue() == mAlarms[aIndex].getValue()))
+                {
+                    mAlarms.erase(mAlarms.begin() + aIndex);
+                    ui->allAlarms->removeItemWidget(aItem);
+                    break;
+                }
             }
         }
     }

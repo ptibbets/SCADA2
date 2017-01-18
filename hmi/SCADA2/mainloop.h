@@ -14,6 +14,8 @@ private:
     bool mPlot {false};
     bool mPlotState[5] {{false}};
 
+    void checkAlarms(OutData &vOutData);
+
 public:
     MainLoop(QObject *vParent, MainWindow &vWindow);
 
