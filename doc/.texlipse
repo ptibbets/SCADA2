@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Wed Jan 18 22:18:28 CET 2017
+markTmpDer=true
+builderNum=2
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=document.tex
+outputFile=SCADA2.pdf
+langSpell=pl
+markDer=true
+srcDir=src
