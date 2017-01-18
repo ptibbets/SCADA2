@@ -40,6 +40,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->rbPump->setChecked(true);
     ui->rbLower->setChecked(true);
     setInData();
+    ui->label_15->setPixmap(QPixmap(QString::fromUtf8("/home/michal/workspace/git/SCADA2/hmi/SCADA2/hmi.png")));
+    ui->label_15->setScaledContents(true);
 }
 
 MainWindow::~MainWindow()
