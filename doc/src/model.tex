@@ -434,3 +434,83 @@ Model układu chłodzenia cieczą procesora komputerowego dany jest równaniami
     \end{cases}
     \label{equ:model}
 \end{equation}
+
+\newpage
+\subsection{Schemat technologiczny procesu}
+\indent
+
+Na podstawie układu równań \eqref{equ:model} oraz wszystkich wcześniejszych
+rozważań dotyczących budowy tworzonego modelu układu chłodzenia cieczą, możliwe
+było stworzenie schematu technologicznego procesu, który przedstawiony został na
+rysunku~\ref{fig:tech}.
+
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}[
+        scale=0.7,
+        annotline/.style = {stealth-},
+        arrows1loop/.style={->,red},
+        arrows2loop/.style={->,white},
+        arrows3loop/.style={->,draw=Gray}]
+        \begin{scope}
+            % water block
+            \filldraw[draw=blue,bottom color=blue!75,top color=red!50] (0, 0) --
+            (4, 0) -- (4, 4) -- (0, 4) -- (0, 0);
+            % radiator
+            \filldraw[draw=blue,bottom color=blue!75,top
+            color=red!50,xshift=10cm,yshift=-2cm] (0, 0) -- (0, 8) -- (4, 8) -- (4, 0)
+            -- (0, 0);
+            % circuit hot
+            \draw[draw=blue,double=red!50,double distance=4pt] (2, 4) -- ++(0, 3) --
+            ++(10, 0) -- ++(0, -1);
+            % circuit cold
+            \draw[draw=blue,double=blue!75,double distance=4pt] (2, 0) -- ++(0, -3) --
+            ++(10, 0) -- ++(0, 1);
+            % arrows
+            \draw[arrows2loop] (3.5,-1.3) -- (3,-1.3);
+            \draw[arrows2loop] (1.75,-0.9) -- (1.75,-0.4);
+            \draw[arrows2loop] (4.5,6.38) -- (5,6.38);
+            \draw[arrows2loop] (7,7.38) -- (7.5,7.38);
+            \draw[arrows2loop] (8.75,6.4) -- (8.75,5.9);
+            \draw[arrows2loop] (8.75,-0.4) -- (8.75,-0.9);
+            
+            \draw[annotline] (7, 6.75) -- ++(0, -1)
+                node[text width=2cm,text centered, font=\small,below] {Hot water};
+            \draw[annotline] (4, -2.75) -- ++(1, 1)
+                node[text width=2cm,text centered, font=\small,above] {Cold water};
+                
+            % pump
+            \begin{scope}[xshift=7cm,yshift=-3cm]
+                \filldraw[fill=Blue!20,draw=Blue] (0,0) circle (0.5cm);
+                \node[below,font=\small] at (0,-0.5) {Pump};
+                \filldraw[fill=Blue!75,draw=Blue,yshift=-0.5cm]
+                    (0,0) arc (240:180:0.4cm)  arc (200:280:0.4cm) ;
+                \filldraw[fill=Blue!75,draw=Blue,yshift=+0.5cm,rotate=180]
+                    (0,0) arc (240:180:0.4cm)  arc (200:280:0.4cm) ;
+                \filldraw[fill=Blue!75,draw=Blue,xshift=+0.5cm,rotate=90]
+                    (0,0) arc (240:180:0.4cm)  arc (200:280:0.4cm) ;
+                \filldraw[fill=Blue!75,draw=Blue,xshift=-0.5cm,rotate=-90]
+                    (0,0) arc (240:180:0.4cm)  arc (200:280:0.4cm) ;
+            \end{scope}
+            
+            % fan
+            \begin{scope}[xshift=12cm,yshift=2cm]
+                \filldraw[fill=blue!20,draw=black] (0,0) circle (1.5cm);
+                \node[right,font=\small] at (2,0) {Fan};
+                \filldraw[fill=black!75,draw=black]
+                    (0, 0) -- ++(0, 1.5) arc (90:45:1.5cm) -- (0, 0);
+                \filldraw[fill=black!75,draw=black]
+                    (0, 0) -- ++(1.5, 0) arc (0:-45:1.5cm) -- (0, 0);
+                \filldraw[fill=black!75,draw=black]
+                    (0, 0) -- ++(0, -1.5) arc (-90:-135:1.5cm) -- (0, 0);
+                \filldraw[fill=black!75,draw=black]
+                    (0, 0) -- ++(-1.5, 0) arc (180:135:1.5cm) -- (0, 0);
+            \end{scope}
+            
+            \node[text width=3cm,text centered,font=\small] at (-1.5, 2) {Water
+            block};
+        \end{scope}
+    \end{tikzpicture}
+    \caption{Schemat technologiczny procesu}
+    \label{fig:tech}
+\end{figure}
