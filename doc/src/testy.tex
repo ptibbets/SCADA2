@@ -1,0 +1,91 @@
+\section{Testy oraz porównania}
+\indent
+
+Poniższy rozdział zawiera kilka testów oprogramowania, które zostały
+przeprowadzone po zakończeniu prac związanych z~implementacją wszystkich
+funkcjonalności. Nie są to na pewno rozważania wszystkich możliwych przypadków,
+lecz w~głównej mierze miały one za zadanie sprawdzić działanie podstawowych
+elementów stworzonego programu, zarówno po stronie komputera, jak
+i~mikrokontrolera.
+
+\subsection*{Działanie symulacji w~czasie rzeczywistym}
+\indent
+
+Sprawdzenie, czy symulacja realizowana jest w~czasie rzeczywistym zostało
+wykonane przy pomocy narzędzi służących do debugowania kodu. Uruchomiony został
+w~ten sposób program na płytce, a~następnie przeprowadzonych zostało około
+kilkanaście iteracji głównej pętli programu, która miała za zadanie prowadzić
+komunikację z~komputerem oraz rozwiązywać równania różniczkowe.
+
+Dzięki wykorzystaniu wewnętrznego timera układu, który zlicza czas
+z~dokładnością do jednej milisekundy udało się ustalić, iż mikrokontroler bez
+problemu radzi sobie z~rozwiązywaniem utworzonych równań różniczkowych oraz
+komunikacją w~czasie nie przekraczającym $1$~[$ms$], gdyż w~czasie wykonywania
+tych operacji nie doszło do przepełnienia licznika timera. Niewątpliwą zasługą
+tego stanu rzeczy było relatywnie wysokie taktowanie rdzenia procesora
+($80$~[$MHz$]), a~także wykorzystanie sprzętowego koprocesora do wykonywania
+operacji zmiennoprzecinkowych.
+
+\subsection*{Niezawodność komunikacji}
+\indent
+
+Ten test polegał na sprawdzeniu na ile niezawodna jest komunikacja pomiędzy
+urządzeniami z~wykorzystaniem interfejsu szeregowego. Przyrównując ten sposób
+komunikacji do łączności sieciowej, przypomina on w~pewnym sensie protokół
+\textit{UDP}, przynajmniej w~wykorzystywanej wersji, gdy nie są używane linie
+sygnałowe. Porównanie to jest bardzo słuszne, gdyż podobnie jak w~transmisji
+z~wykorzystaniem protokołu \textit{UDP} jest ona bezpołączeniowa, a~zatem
+wszystkie aspekty odpowiedzialne za poprawność oraz skuteczność transmisji muszą
+być wykonywane na wyższej warstwie.
+
+W~badanych sytuacjach transmisja przebiegała prawidłowo, gdy zarówno urządzenie,
+jak i~aplikacja komputerowa, zostały uruchomione w~sposób prawidłowy. Nie udało
+się w~takim przypadku zaobserwować jakichkolwiek zakłóceń transmisji. Pewne
+problemy pojawiły się natomiast w~przypadku chwilowego ,,zawieszenia się''
+komputera z~powodu wykonywania jednocześnie innych operacji na nim. Doszło wtedy
+najprawdopodobniej do rozsynchronizowania transmisji, przez co aplikacja,
+w~obecnej chwili nieprzygotowana w~pełni na taką sytuację, nie poradziła sobie
+z~tym i~uległa ,,zawieszeniu''. Niestety nie udało się odtworzyć przedstawionego
+przypadku, przez co niemożliwe było zarówno zbadanie jego przyczyn, jak
+i~wdrożenie odpowiednich mechanizmów zabezpieczających przed pojawieniem się
+podobnych sytuacji w~przyszłości.
+
+\subsection*{Stabilność działania aplikacji komputerowej}
+\indent
+
+Pomijając sytuacje, gdy kod programu był w~fazie rozwoju i~testów, nie udało się
+zaobserwować nieprzewidywalnego zachowania aplikacji. Zapewne duża w~tym zasługa
+bardzo dobrze stworzonej biblioteki \textit{Qt}, która umożliwia relatywnie
+łatwe tworzenie programów ze środowiskiem graficznym, a~jednocześnie jest to na
+tyle rozbudowane w~ukrytej warstwie tej biblioteki, że odpowiednio podchodząc do
+programowania z~jej wykorzystaniem można łatwo unikać popełniania poważniejszych
+błędów w~kodzie źródłowym.
+
+\subsection*{Porównanie użytkowania z~oprogramowaniem specjalistycznym}
+\indent
+
+Na podstawie doświadczeń wyniesionych z~zajęć, które prowadzone były
+z~wykorzystaniem specjalistycznego oprogramowania typu SCADA możliwe było
+dokonanie porównania funkcjonalności stworzonej aplikacji z~programem
+\textit{zenon}.
+
+Pewne szczególne różnice oraz podobieństwa zostały przedstawione we
+wcześniejszych rozdziałach dotyczących specyficznych elementów stworzonego
+oprogramowania. W~tym miejscu należy jednak zwrócić szczególną uwagę, że o~ile
+program \textit{zenon} oraz jemu podobne służą do tworzenia paneli operatorskich
+dla dowolnego procesu technologicznego i~umożliwiają komunikację z~wiekszością
+popularnego sprzętu dostępnego na rynku z~wykorzystaniem ustandaryzowanych
+protokołów, o~tyle stworzona aplikacja wykonywana była z~myślą o~jednym
+konkretnym procesie technologicznym realizowanym na konkretnym urządzeniu, zaś
+komunikacja przebiegała z~wykorzystaniem specjalnie przygotowanych na te
+potrzeby struktur danych.
+
+Na pewno należy nadmienić, że czas tworzenia oprogramowania pod konkretne
+zastosowanie może być znacznie dłuższy, aniżeli tworzenie paneli operatorskich
+w~specjalnie do tego celu stworzonych programach, nie mniej jednak nic nie stoi
+na przeszkodzie, aby przygotować odpowiednie biblioteki do dowolnego języka
+programowania w~celu ułatwienia i~przyspieszenia tego procesu. Zaletą wybranego
+podejścia była możliwość dostosowania programu oraz jego zasobów pod konkretne
+zastosowanie, przez co użytkownik oraz programista nie miał problemu
+z~odnalezieniem się w~dostępnych opcjach konfiguracyjnych oraz funkcjach
+bibliotecznych.
